@@ -1,0 +1,19 @@
+{
+  "name": "cycle-talk",
+  "version": "1.0.0",
+  "description": "My slides for my Cycle.js talk at Node.js Wellington",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Widdershin/cycle-talk.git"
+  },
+  "author": "Nick Johnstone",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Widdershin/cycle-talk/issues"
+  },
+  "homepage": "https://github.com/Widdershin/cycle-talk"
+}
