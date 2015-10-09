@@ -20,7 +20,8 @@
   "dependencies": {
     "@cycle/core": "^3.1.0",
     "@cycle/dom": "^5.3.1",
-    "babelify": "^6.3.0"
+    "babelify": "^6.3.0",
+    "lodash": "^3.10.1"
   },
   "devDependencies": {
     "browserify": "^11.2.0",
