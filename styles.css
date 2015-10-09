@@ -1,0 +1,39 @@
+@import url(https://fonts.googleapis.com/css?family=PT+Sans);
+
+body {
+  font-family: 'PT Sans';
+}
+
+.slide {
+  border: 1px solid darkgray;
+  border-radius: 4px;
+  padding: 15px;
+  text-align: center;
+}
+
+.slide-navigation {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.button-container {
+  width: 200px;
+  margin: auto;
+  height: 40px;
+  text-align: center;
+}
+
+.previous-slide {
+  display: inline-block;
+}
+
+.slide-position {
+  display: inline-block;
+  margin: 10px;
+}
+
+.next-slide {
+  display: inline-block;
+}
+

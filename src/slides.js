@@ -10,17 +10,21 @@ function slideNavigation (slidePosition, totalSlides) {
 
   return (
     h('.slide-navigation', [
-      h('button.previous-slide', {disabled: showingFirstSlide()}, 'Previous'),
-      h('button.next-slide', {disabled: showingLastSlide()}, 'Next')
+      h('.button-container', [
+        h('button.previous-slide', {disabled: showingFirstSlide()}, 'Previous'),
+        h('.slide-position', `Slide #${slidePosition + 1}/${totalSlides}`),
+        h('button.next-slide', {disabled: showingLastSlide()}, 'Next')
+      ])
     ])
   );
 }
 
 function slideDeckView (slidePosition) {
+  const currentSlide = slideViews[slidePosition];
+
   return (
     h('.slide-deck', [
-      h('.current-slide', `Slide #${slidePosition}`),
-      slideViews[slidePosition](),
+      h('.slide', [currentSlide]),
       slideNavigation(slidePosition, slideViews.length)
     ])
   );

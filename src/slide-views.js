@@ -1,11 +1,18 @@
 import {h} from '@cycle/dom';
+import marked from 'marked';
 
 export default [
-  () => (
-    h('h1', 'Hello world!')
-  ),
+`
+  Hello world
+  ----
 
-  () => (
-    h('h2', 'And another slide')
-  )
-];
+  Sweet now I have bullet points and text
+
+  * much better than writing html
+  * and still instant reloads
+`,
+
+`
+  Test
+`
+].map(markdown => h('.markdown', {innerHTML: marked(markdown)}));
