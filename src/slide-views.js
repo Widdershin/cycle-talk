@@ -1,14 +1,32 @@
 import {Rx} from '@cycle/core';
 import {h} from '@cycle/dom';
 import marked from 'marked';
+import renderStreams from './render-stream';
 
 const md = (markdown) => Rx.Observable.just(h('.markdown', {innerHTML: marked(markdown)}));
 
 function observableDemo () {
-  const counter$ = Rx.Observable.interval(1000);
+  const counter$ = Rx.Observable.just(5);
+
+  const intro = md(`
+Say we're having a party.
+We want to invite some guests. This is a list, so we can express it as an array.
+
+    ['Jim', 'Bill', 'Sally']
+
+We can express their arrivals over time as an observable stream!
+`);
+
+  const arrivals = [
+    {position: 10, value: 'Jim'},
+    {position: 40, value: 'Bill'},
+    {position: 70, value: 'Sally'}
+  ];
+
+  const stream = renderStreams(65, arrivals);
 
   return counter$.map((counter) => (
-    h('.test', 'test' + counter)
+    h('.test', [intro, stream])
   ));
 }
 
