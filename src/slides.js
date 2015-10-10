@@ -13,11 +13,9 @@ function slideNavigation (slidePosition, totalSlides) {
 
   return (
     h('.slide-navigation', [
-      h('.button-container', [
-        h('button.previous-slide', {disabled: showingFirstSlide()}, 'Previous'),
-        h('.slide-position', `Slide #${slidePosition + 1}/${totalSlides}`),
-        h('button.next-slide', {disabled: showingLastSlide()}, 'Next')
-      ])
+      h('button.previous-slide', {disabled: showingFirstSlide()}, 'Previous'),
+      h('.slide-position', `Slide #${slidePosition + 1}/${totalSlides}`),
+      h('button.next-slide', {disabled: showingLastSlide()}, 'Next')
     ])
   );
 }
@@ -43,6 +41,7 @@ function slideDeckView (slidePosition) {
 
   return (
     h('.slide-deck', [
+      h('h3', 'Cycle.js'),
       h('.slide', [currentSlide]),
       slideNavigation(slidePosition, slideViews.length)
     ])
