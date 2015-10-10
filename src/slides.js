@@ -68,7 +68,7 @@ export default function slides ({DOM}) {
     nextSlideButton$.merge(nextSlideKey$).map(_ => +1),
     previousSlideButton$.merge(previousSlideKey$).map(_ => -1)
   ).scan(limit(_.add, {min: 0, max: slideViews.length - 1}))
-    .startWith(0);
+    .startWith(slideViews.length - 1)
 
   return {
     DOM: slidePosition$.map(slideDeckView)
