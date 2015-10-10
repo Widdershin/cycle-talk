@@ -5,13 +5,19 @@ import renderStreams from './render-stream';
 
 const md = (markdown) => Rx.Observable.just(h('.markdown', {innerHTML: marked(markdown)}));
 
-function observableDemo () {
-  const arrivals = [
-    {position: 10, value: 'Jim'},
-    {position: 40, value: 'Bill'},
-    {position: 70, value: 'Sally'}
-  ];
+const arrivals = [
+  {position: 10, value: 'Jim'},
+  {position: 40, value: 'Bill'},
+  {position: 70, value: 'Sally'}
+];
 
+const arrivalsReduced = [
+  {position: 10, value: ['Jim']},
+  {position: 40, value: ['Jim', 'Bill']},
+  {position: 70, value: ['Jim', 'Bill', 'Sally']}
+];
+
+function observableDemo () {
   const stream = renderStreams(65, arrivals);
   const counter$ = Rx.Observable.just(5);
 
@@ -29,6 +35,28 @@ We can express their arrivals over time as an observable stream!
   return counter$.map((counter) => (
     h('.test', [intro, stream])
   ));
+}
+
+function observableDemoContinued () {
+  const preamble = md(`
+So, we have our \`arrivals$\`:
+  `);
+
+  const wantAList = md(`
+Let's say we want a list of all the party people after each arrives.
+
+    arrivals$.scan((partyPeople, arrival) => partyPeople.concat([arrival]), ())
+  `);
+
+
+  return Rx.Observable.just(
+    [
+      preamble,
+      renderStreams(65, arrivals),
+      wantAList,
+      renderStreams(65, arrivalsReduced)
+    ]
+  )
 }
 
 export default [
@@ -79,5 +107,6 @@ Arrays are data expressed in space. Arrays have an order and each element has a 
 In contrast, Observables are data expressed in time.
   `),
 
-  observableDemo()
+  observableDemo(),
+  observableDemoContinued()
 ];
