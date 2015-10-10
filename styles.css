@@ -61,6 +61,7 @@ blockquote {
 }
 
 .stream {
+  position: relative;
   height: 30px;
   font-size: 0.5em;
   font-family: Helvetica;
