@@ -20,9 +20,12 @@ body {
   background: #F0F0F0;
   box-shadow: 1px 2px 3px gray;
   border-radius: 2px;
-  padding: 15px;
-  min-width: 300px;
+  padding: 30px 50px;
   min-height: 12em;
+  flex-grow: 1;
+  margin: 60px;
+  font-size: 1.5em;
+  width: 70%;
 }
 
 .slide-navigation {
@@ -34,3 +37,12 @@ body {
 
 .slide-position {
   margin: 10px;
+}
+
+blockquote {
+  color: gray;
+  border-left: 2px solid lightgray;
+  padding: 0px 10px;
+  margin-bottom: 30px;
+  margin-left: 20px;
+}

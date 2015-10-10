@@ -20,6 +20,15 @@ function slideNavigation (slidePosition, totalSlides) {
   );
 }
 
+function slideDeckView (slide, slidePosition) {
+  return (
+    h('.slide-deck', [
+      h('.slide', [slide]),
+      slideNavigation(slidePosition, slideViews.length)
+    ])
+  );
+}
+
 function limit (operator, {min, max}) {
   return (...args) => {
     const result = operator(...args);
@@ -34,18 +43,6 @@ function limit (operator, {min, max}) {
 
     return result;
   };
-}
-
-function slideDeckView (slidePosition) {
-  const currentSlide = slideViews[slidePosition];
-
-  return (
-    h('.slide-deck', [
-      h('h3', 'Cycle.js'),
-      h('.slide', [currentSlide]),
-      slideNavigation(slidePosition, slideViews.length)
-    ])
-  );
 }
 
 function keyIs (...keys) {
@@ -67,10 +64,12 @@ export default function slides ({DOM}) {
   const slidePosition$ = Rx.Observable.merge(
     nextSlideButton$.merge(nextSlideKey$).map(_ => +1),
     previousSlideButton$.merge(previousSlideKey$).map(_ => -1)
-  ).scan(limit(_.add, {min: 0, max: slideViews.length - 1}))
-    .startWith(slideViews.length - 1)
+  ).scan(limit(_.add, {min: 0, max: slideViews.length - 1}), slideViews.length - 1)
+    .startWith(slideViews.length - 1);
+
+  const slide$$ = slidePosition$.map(position => slideViews[position]);
 
   return {
-    DOM: slidePosition$.map(slideDeckView)
+    DOM: slide$$.switch().withLatestFrom(slidePosition$, slideDeckView)
   };
 }
