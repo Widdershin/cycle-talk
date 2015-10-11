@@ -1,6 +1,5 @@
-
 const {h} = require('@cycle/dom');
-
+const _ = require('lodash');
 
 function renderFeatureValue (value) {
   if (!value) { return; }
@@ -11,7 +10,7 @@ function renderFeatureValue (value) {
 }
 
 function renderValue (value) {
-  return JSON.stringify(value, null, 0);
+  return value;
 }
 
 function renderStreamValue (currentTime, feature, streamValue) {
@@ -39,19 +38,38 @@ function renderStream (currentTime, streamValues, even) {
     feature = '.feature';
   }
 
+  const streamMarker = currentTime ? h('.stream-marker', {style: {'margin-left': currentTime + '%'}}) : null;
+
   return (
     h(`.stream ${feature}`, [
       h('.stream-title', streamValues.label),
       ...streamValues.map(renderStreamValue.bind(null, currentTime, !!feature)),
-      h('.stream-marker', {style: {'margin-left': currentTime + '%'}})
+      streamMarker
     ])
   );
 }
 
-function renderStreams (currentTime, ...streamValues) {
+function renderLabel (label) {
+  function renderLabelMarker (value, index) {
+    const labelOffset = 100 / (label.end - label.start);
+
+    return h('.label-marker', {style: {'left': index * labelOffset + '%'}}, value.toString());
+  }
+
+  return (
+    h('.stream.label', [
+      _.range(label.start, label.end).map(renderLabelMarker),
+      h('.label-marker.end', {style: {'right': '2px'}}, label.end.toString())
+    ])
+  );
+}
+
+function renderStreams (currentTime, streamValues, label) {
+  const labelElement = label ? renderLabel(label) : null;
+
   return h('.streams', streamValues.map((streamValueSet, index) =>
     renderStream(currentTime, streamValueSet, index % 2 === 0)
-  ));
+  ).concat([labelElement]));
 }
 
 module.exports = renderStreams;

@@ -17,8 +17,35 @@ const arrivalsReduced = [
   {position: 70, value: ['Jim', 'Bill', 'Sally']}
 ];
 
+function whatIsAnObservable () {
+  const intro = md(`
+What on earth is an observable?
+---
+Observables are a data structure. They're comparable to arrays.
+
+If arrays are data expressed over space:
+
+    var children = ['Sally', 'Jim', 'Bob'];
+    // x axis:      < ---  position --- >
+
+Observables are data expressed over time:
+  `);
+
+  const childrenOverTime = [
+    {position: 22, value: 'Sally'},
+    {position: 55, value: 'Jim'},
+    {position: 66, value: 'Bob'}
+  ];
+
+  const childrenOverTimeStream = renderStreams(null, [childrenOverTime], {start: 1998, end: 2003});
+
+  return Rx.Observable.just(
+    h('div', [intro, childrenOverTimeStream])
+  );
+}
+
 function observableDemo () {
-  const stream = renderStreams(65, arrivals);
+  const stream = renderStreams(65, [arrivals]);
   const counter$ = Rx.Observable.just(5);
 
   const intro = md(`
@@ -48,15 +75,14 @@ Let's say we want a list of all the party people after each arrives.
     arrivals$.scan((partyPeople, arrival) => partyPeople.concat([arrival]), ())
   `);
 
-
   return Rx.Observable.just(
     [
       preamble,
-      renderStreams(65, arrivals),
+      renderStreams(65, [arrivals]),
       wantAList,
-      renderStreams(65, arrivalsReduced)
+      renderStreams(65, [arrivals])
     ]
-  )
+  );
 }
 
 export default [
@@ -97,15 +123,7 @@ Why should you care?
 * Cycle is built around observables
   `),
 
-  md(`
-What on earth is an observable?
----
-Observables are a data structure. They're akin to arrays.
-
-Arrays are data expressed in space. Arrays have an order and each element has a position.
-
-In contrast, Observables are data expressed in time.
-  `),
+  whatIsAnObservable(),
 
   observableDemo(),
   observableDemoContinued()

@@ -64,8 +64,8 @@ export default function slides ({DOM}) {
   const slidePosition$ = Rx.Observable.merge(
     nextSlideButton$.merge(nextSlideKey$).map(_ => +1),
     previousSlideButton$.merge(previousSlideKey$).map(_ => -1)
-  ).scan(limit(_.add, {min: 0, max: slideViews.length - 1}), slideViews.length - 1)
-    .startWith(slideViews.length - 1);
+  ).scan(limit(_.add, {min: 0, max: slideViews.length - 1}), slideViews.length - 3)
+    .startWith(slideViews.length - 3);
 
   const slide$$ = slidePosition$.map(position => slideViews[position]);
 
