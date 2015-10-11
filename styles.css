@@ -81,9 +81,10 @@ blockquote {
 }
 
 .stream-title {
-  margin: 5px;
   color: #757575;
   position: fixed;
+  font-size: 0.7em;
+  top: 5px;
 }
 
 .stream-marker {
@@ -137,4 +138,22 @@ blockquote {
   font-size: 0.7em;
 }
 
+.contents {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 
+.example {
+  text-align: center;
+  background: #663399;
+  color: white;
+  margin: 10px auto;
+  padding: 10px;
+  padding-bottom: 15px;
+  border-radius: 20px;
+}
+
+.markdown p {
+  margin-bottom: 0px;
+}

@@ -42,6 +42,31 @@ Observables are streams, data expressed over time:
 }
 
 function whatCanYouDoWithThem (DOM) {
+  const introText = `
+So we can represent data over time as an object. What does that give us?
+
+Well, in Javascript it's a common pattern that you need to work with a stream of events.
+
+Say we have a button.
+`;
+  const click$ = DOM.select('.click-me').events('click').map(_ => 'Click!');
+
+  const timeTravel = TimeTravel(DOM, [
+    {stream: click$, label: 'click$.map(_ => "Click")'}
+  ]);
+
+  return timeTravel.DOM.map(timeTravelBar =>
+    h('.contents', [
+      md(introText)(DOM),
+      h('.example', [
+        h('button.click-me', 'Click me!'),
+      ]),
+      timeTravelBar
+    ])
+  );
+}
+
+function counterExample (DOM) {
   const click$ = DOM.select('.click-me').events('click').map(_ => 'Click!');
   const clickValue$ = click$.map(_ => +1);
   const counter$ = clickValue$.scan(_.add, 0).startWith(0);
@@ -53,9 +78,12 @@ function whatCanYouDoWithThem (DOM) {
   ]);
 
   return Rx.Observable.combineLatest(timeTravel.timeTravel.counter$, timeTravel.DOM, (count, timeTravelBar) =>
-    h('div', [
-      h('div', count.toString()),
-      h('button.click-me', 'Click me'),
+    h('.contents', [
+      md(introText)(DOM),
+      h('.example', [
+        h('button.click-me', 'Click me!'),
+        h('div', count.toString())
+      ]),
       timeTravelBar
     ])
   );

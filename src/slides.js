@@ -63,11 +63,14 @@ export default function slides ({DOM}) {
   const previousSlideKey$ = RxDOM.fromEvent(document.body, 'keypress')
     .filter(keyIs('ArrowLeft'));
 
+  // for development
+  const startingSlide = slideViews.length - 1;
+
   const slidePosition$ = Rx.Observable.merge(
     nextSlideButton$.merge(nextSlideKey$).map(_ => +1),
     previousSlideButton$.merge(previousSlideKey$).map(_ => -1)
-  ).scan(limit(_.add, {min: 0, max: slideViews.length - 1}), 0)
-    .startWith(0);
+  ).scan(limit(_.add, {min: 0, max: slideViews.length - 1}), startingSlide)
+    .startWith(startingSlide);
 
   const slide$$ = slidePosition$.map(position => slideViews[position]);
 
