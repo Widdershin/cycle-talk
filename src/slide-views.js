@@ -59,7 +59,7 @@ Say we have a button.
     h('.contents', [
       md(introText)(DOM),
       h('.example', [
-        h('button.click-me', 'Click me!'),
+        h('button.click-me', 'Click me!')
       ]),
       timeTravelBar
     ])
@@ -108,6 +108,7 @@ What we're going to cover:
 * What is Cycle.js?
 * Why should you care?
 * How does it compare to say, jQuery or React?
+* How do you build apps in Cycle.js?
   `),
 
   md(`
@@ -116,13 +117,13 @@ Cycle.js is ...
 
 * A tool for building javascript applications, written by Andre Staltz (@staltz)
 * Akin to tools like React or Elm
-* Very fun to build apps in
+* Extremely fun to build apps with
   `),
 
   md(`
-Another framework?
----
 > "Fool!" says the wizard. "Do you think I want to learn yet another framework?"
+
+![grumpy cat](/images/grumpy-wizard-cat.png)
 
 I think in this case, you actually might.
   `),
@@ -140,5 +141,7 @@ Why should you care?
 
   whatCanYouDoWithThem,
 
-  counterExample
+  counterExample,
+
+
 ];

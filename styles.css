@@ -48,6 +48,7 @@ blockquote {
 }
 
 .stream-value {
+  box-shadow: none;
   position: absolute;
   border-radius: 30px;
   background: #FAFAFA;
@@ -85,6 +86,7 @@ blockquote {
   position: fixed;
   font-size: 0.7em;
   top: 5px;
+  white-space: pre;
 }
 
 .stream-marker {
@@ -154,4 +156,11 @@ blockquote {
 
 .markdown p {
   margin-bottom: 0px;
+  display: flex;
+  flex-direction: row;
+}
+
+.slide p img {
+  margin: auto;
+  max-height: 300px;
 }
