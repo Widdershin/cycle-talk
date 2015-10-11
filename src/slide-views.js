@@ -118,6 +118,8 @@ Cycle.js is ...
 * A tool for building javascript applications, written by Andre Staltz (@staltz)
 * Akin to tools like React or Elm
 * Extremely fun to build apps with
+
+![cycle logo](http://cycle.js.org/img/cyclejs_logo.svg)
   `),
 
   md(`

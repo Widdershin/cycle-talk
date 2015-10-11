@@ -21,11 +21,11 @@ body {
   box-shadow: 1px 2px 3px gray;
   border-radius: 2px;
   padding: 15px 50px;
-  min-height: 12em;
+  height: 12em;
   flex-grow: 1;
   margin: 60px;
   font-size: 1.5em;
-  width: 70%;
+  width: 600px;
 }
 
 .slide-navigation {
@@ -156,11 +156,17 @@ blockquote {
 
 .markdown p {
   margin-bottom: 0px;
-  display: flex;
-  flex-direction: row;
 }
 
-.slide p img {
+.slide p img  {
   margin: auto;
-  max-height: 300px;
+  display: flex;
+}
+
+.slide p img[alt="cycle logo"] {
+  height: 8em;
+}
+
+.slide p img[alt="grumpy cat"] {
+  height: 12em;
 }
