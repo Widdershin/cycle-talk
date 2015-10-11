@@ -21,7 +21,7 @@ if (module.hot) module.hot.accept();
 
 _cycleCore2['default'].run(_srcSlides2['default'], drivers);
 
-},{"./src/slides":136,"@cycle/core":2,"@cycle/dom":6}],2:[function(require,module,exports){
+},{"./src/slides":138,"@cycle/core":2,"@cycle/dom":6}],2:[function(require,module,exports){
 "use strict";
 
 var Rx = require("rx");
@@ -10566,7 +10566,7 @@ Rx.Observable.prototype.flatMapWithMaxConcurrent = function(limit, selector, res
 }.call(this));
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"_process":138}],4:[function(require,module,exports){
+},{"_process":119}],4:[function(require,module,exports){
 "use strict";
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -14519,7 +14519,7 @@ if (typeof document !== 'undefined') {
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"min-document":137}],90:[function(require,module,exports){
+},{"min-document":118}],90:[function(require,module,exports){
 "use strict";
 
 module.exports = function isObject(x) {
@@ -16372,6 +16372,101 @@ function isArray(obj) {
 }
 
 },{}],118:[function(require,module,exports){
+
+},{}],119:[function(require,module,exports){
+// shim for using process in browser
+
+var process = module.exports = {};
+var queue = [];
+var draining = false;
+var currentQueue;
+var queueIndex = -1;
+
+function cleanUpNextTick() {
+    draining = false;
+    if (currentQueue.length) {
+        queue = currentQueue.concat(queue);
+    } else {
+        queueIndex = -1;
+    }
+    if (queue.length) {
+        drainQueue();
+    }
+}
+
+function drainQueue() {
+    if (draining) {
+        return;
+    }
+    var timeout = setTimeout(cleanUpNextTick);
+    draining = true;
+
+    var len = queue.length;
+    while(len) {
+        currentQueue = queue;
+        queue = [];
+        while (++queueIndex < len) {
+            if (currentQueue) {
+                currentQueue[queueIndex].run();
+            }
+        }
+        queueIndex = -1;
+        len = queue.length;
+    }
+    currentQueue = null;
+    draining = false;
+    clearTimeout(timeout);
+}
+
+process.nextTick = function (fun) {
+    var args = new Array(arguments.length - 1);
+    if (arguments.length > 1) {
+        for (var i = 1; i < arguments.length; i++) {
+            args[i - 1] = arguments[i];
+        }
+    }
+    queue.push(new Item(fun, args));
+    if (queue.length === 1 && !draining) {
+        setTimeout(drainQueue, 0);
+    }
+};
+
+// v8 likes predictible objects
+function Item(fun, array) {
+    this.fun = fun;
+    this.array = array;
+}
+Item.prototype.run = function () {
+    this.fun.apply(null, this.array);
+};
+process.title = 'browser';
+process.browser = true;
+process.env = {};
+process.argv = [];
+process.version = ''; // empty string to avoid regexp issues
+process.versions = {};
+
+function noop() {}
+
+process.on = noop;
+process.addListener = noop;
+process.once = noop;
+process.off = noop;
+process.removeListener = noop;
+process.removeAllListeners = noop;
+process.emit = noop;
+
+process.binding = function (name) {
+    throw new Error('process.binding is not supported');
+};
+
+process.cwd = function () { return '/' };
+process.chdir = function (dir) {
+    throw new Error('process.chdir is not supported');
+};
+process.umask = function() { return 0; };
+
+},{}],120:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -16413,7 +16508,7 @@ function makeTimeTravelPosition$(mousePosition$, dragging$) {
 }
 
 module.exports = makeTimeTravelPosition$;
-},{"@cycle/core":2}],119:[function(require,module,exports){
+},{"@cycle/core":2}],121:[function(require,module,exports){
 'use strict';
 
 var _require = require('@cycle/core');
@@ -16462,7 +16557,7 @@ function intent(DOM) {
 }
 
 module.exports = intent;
-},{"./calculate-time-travel-position":118,"@cycle/core":2}],120:[function(require,module,exports){
+},{"./calculate-time-travel-position":120,"@cycle/core":2}],122:[function(require,module,exports){
 "use strict";
 
 function recordStream(streamInfo, time$) {
@@ -16491,7 +16586,7 @@ function recordStreams(streams, time$) {
 }
 
 module.exports = recordStreams;
-},{}],121:[function(require,module,exports){
+},{}],123:[function(require,module,exports){
 'use strict';
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i]; return arr2; } else { return Array.from(arr); } }
@@ -16553,7 +16648,7 @@ function renderStreams(currentTime) {
 }
 
 module.exports = renderStreams;
-},{"@cycle/dom":6}],122:[function(require,module,exports){
+},{"@cycle/dom":6}],124:[function(require,module,exports){
 "use strict";
 
 function scopedDOM(DOM, scope) {
@@ -16565,7 +16660,7 @@ function scopedDOM(DOM, scope) {
 }
 
 module.exports = scopedDOM;
-},{}],123:[function(require,module,exports){
+},{}],125:[function(require,module,exports){
 'use strict';
 
 var _require = require('@cycle/dom');
@@ -16577,7 +16672,7 @@ function stylesheet() {
 }
 
 module.exports = stylesheet;
-},{"@cycle/dom":6}],124:[function(require,module,exports){
+},{"@cycle/dom":6}],126:[function(require,module,exports){
 'use strict';
 
 var _require = require('@cycle/core');
@@ -16603,7 +16698,7 @@ function timeTravelStreams(streams, time$) {
 }
 
 module.exports = timeTravelStreams;
-},{"@cycle/core":2}],125:[function(require,module,exports){
+},{"@cycle/core":2}],127:[function(require,module,exports){
 'use strict';
 
 require('es6-shim');
@@ -16636,7 +16731,7 @@ function TimeTravel(DOM, streams) {
 }
 
 module.exports = TimeTravel;
-},{"./intent":119,"./record-streams":120,"./scoped-dom":122,"./time":126,"./time-travel-streams":124,"./view":127,"es6-shim":128}],126:[function(require,module,exports){
+},{"./intent":121,"./record-streams":122,"./scoped-dom":124,"./time":128,"./time-travel-streams":126,"./view":129,"es6-shim":130}],128:[function(require,module,exports){
 'use strict';
 
 var _require = require('@cycle/core');
@@ -16668,7 +16763,7 @@ function makeTime$(playing$, timeTravelPosition$) {
 }
 
 module.exports = makeTime$;
-},{"@cycle/core":2}],127:[function(require,module,exports){
+},{"@cycle/core":2}],129:[function(require,module,exports){
 'use strict';
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i]; return arr2; } else { return Array.from(arr); } }
@@ -16697,7 +16792,7 @@ function timeTravelBarView(name, time$, playing$, recordedStreams) {
 }
 
 module.exports = timeTravelBarView;
-},{"./render-streams":121,"./style":123,"@cycle/core":2,"@cycle/dom":6}],128:[function(require,module,exports){
+},{"./render-streams":123,"./style":125,"@cycle/core":2,"@cycle/dom":6}],130:[function(require,module,exports){
 (function (process,global){
  /*!
   * https://github.com/paulmillr/es6-shim
@@ -20007,7 +20102,7 @@ module.exports = timeTravelBarView;
 }));
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"_process":138}],129:[function(require,module,exports){
+},{"_process":119}],131:[function(require,module,exports){
 (function (global){
 /**
  * @license
@@ -32362,7 +32457,7 @@ module.exports = timeTravelBarView;
 }.call(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],130:[function(require,module,exports){
+},{}],132:[function(require,module,exports){
 (function (global){
 /**
  * marked - a markdown parser
@@ -33651,7 +33746,7 @@ if (typeof module !== 'undefined' && typeof exports === 'object') {
 }());
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],131:[function(require,module,exports){
+},{}],133:[function(require,module,exports){
 (function (global){
 // Copyright (c) Microsoft Open Technologies, Inc. All rights reserved. See License.txt in the project root for license information.
 
@@ -34669,11 +34764,11 @@ function normalizeAjaxLoadEvent(e, xhr, settings) {
   return Rx;
 }));
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"rx":133}],132:[function(require,module,exports){
+},{"rx":135}],134:[function(require,module,exports){
 var Rx = require('rx');
 require('./dist/rx.dom');
 module.exports = Rx;
-},{"./dist/rx.dom":131,"rx":133}],133:[function(require,module,exports){
+},{"./dist/rx.dom":133,"rx":135}],135:[function(require,module,exports){
 (function (process,global){
 // Copyright (c) Microsoft, All rights reserved. See License.txt in the project root for license information.
 
@@ -46786,7 +46881,7 @@ var ReactiveTest = Rx.ReactiveTest = {
 }.call(this));
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"_process":138}],134:[function(require,module,exports){
+},{"_process":119}],136:[function(require,module,exports){
 'use strict';
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i]; return arr2; } else { return Array.from(arr); } }
@@ -46855,7 +46950,7 @@ function renderStreams(currentTime, streamValues, label) {
 
 module.exports = renderStreams;
 
-},{"@cycle/dom":6,"lodash":129}],135:[function(require,module,exports){
+},{"@cycle/dom":6,"lodash":131}],137:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -46937,7 +47032,7 @@ function counterExample(DOM) {
 exports['default'] = [md('\nWelcome to our live coding Cycle.js adventure!\n---\n\nWhat we\'re going to cover:\n\n* What is Cycle.js?\n* Why should you care?\n* How does it compare to say, jQuery or React?\n  '), md('\nCycle.js is ...\n---\n\n* A tool for building javascript applications, written by Andre Staltz (@staltz)\n* Akin to tools like React or Elm\n* Very fun to build apps in\n  '), md('\nAnother framework?\n---\n> "Fool!" says the wizard. "Do you think I want to learn yet another framework?"\n\nI think in this case, you actually might.\n  '), md('\nWhy should you care?\n---\n\n* Cycle is a way of building reactive apps using functional programming\n* It\'s a fundamentally different way of thinking about building apps\n* Cycle is built around observables\n  '), whatIsAnObservable, whatCanYouDoWithThem, counterExample];
 module.exports = exports['default'];
 
-},{"./render-stream":134,"@cycle/core":2,"@cycle/dom":6,"cycle-time-travel":125,"lodash":129,"marked":130}],136:[function(require,module,exports){
+},{"./render-stream":136,"@cycle/core":2,"@cycle/dom":6,"cycle-time-travel":127,"lodash":131,"marked":132}],138:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -47020,7 +47115,7 @@ function slides(_ref2) {
   var previousSlideKey$ = RxDOM.fromEvent(document.body, 'keypress').filter(keyIs('ArrowLeft'));
 
   // for development
-  var startingSlide = _slideViews2['default'].length - 1;
+  var startingSlide = 0;
 
   var slidePosition$ = _cycleCore.Rx.Observable.merge(nextSlideButton$.merge(nextSlideKey$).map(function (_) {
     return +1;
@@ -47041,98 +47136,4 @@ function slides(_ref2) {
 
 module.exports = exports['default'];
 
-},{"./slide-views":135,"@cycle/core":2,"@cycle/dom":6,"lodash":129,"rx-dom":132}],137:[function(require,module,exports){
-
-},{}],138:[function(require,module,exports){
-// shim for using process in browser
-
-var process = module.exports = {};
-var queue = [];
-var draining = false;
-var currentQueue;
-var queueIndex = -1;
-
-function cleanUpNextTick() {
-    draining = false;
-    if (currentQueue.length) {
-        queue = currentQueue.concat(queue);
-    } else {
-        queueIndex = -1;
-    }
-    if (queue.length) {
-        drainQueue();
-    }
-}
-
-function drainQueue() {
-    if (draining) {
-        return;
-    }
-    var timeout = setTimeout(cleanUpNextTick);
-    draining = true;
-
-    var len = queue.length;
-    while(len) {
-        currentQueue = queue;
-        queue = [];
-        while (++queueIndex < len) {
-            currentQueue[queueIndex].run();
-        }
-        queueIndex = -1;
-        len = queue.length;
-    }
-    currentQueue = null;
-    draining = false;
-    clearTimeout(timeout);
-}
-
-process.nextTick = function (fun) {
-    var args = new Array(arguments.length - 1);
-    if (arguments.length > 1) {
-        for (var i = 1; i < arguments.length; i++) {
-            args[i - 1] = arguments[i];
-        }
-    }
-    queue.push(new Item(fun, args));
-    if (queue.length === 1 && !draining) {
-        setTimeout(drainQueue, 0);
-    }
-};
-
-// v8 likes predictible objects
-function Item(fun, array) {
-    this.fun = fun;
-    this.array = array;
-}
-Item.prototype.run = function () {
-    this.fun.apply(null, this.array);
-};
-process.title = 'browser';
-process.browser = true;
-process.env = {};
-process.argv = [];
-process.version = ''; // empty string to avoid regexp issues
-process.versions = {};
-
-function noop() {}
-
-process.on = noop;
-process.addListener = noop;
-process.once = noop;
-process.off = noop;
-process.removeListener = noop;
-process.removeAllListeners = noop;
-process.emit = noop;
-
-process.binding = function (name) {
-    throw new Error('process.binding is not supported');
-};
-
-// TODO(shtylman)
-process.cwd = function () { return '/' };
-process.chdir = function (dir) {
-    throw new Error('process.chdir is not supported');
-};
-process.umask = function() { return 0; };
-
-},{}]},{},[1]);
+},{"./slide-views":137,"@cycle/core":2,"@cycle/dom":6,"lodash":131,"rx-dom":134}]},{},[1]);
