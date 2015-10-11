@@ -3,21 +3,12 @@ import {h} from '@cycle/dom';
 import marked from 'marked';
 import renderStreams from './render-stream';
 
-const md = (markdown) => Rx.Observable.just(h('.markdown', {innerHTML: marked(markdown)}));
+const _ = require('lodash');
 
-const arrivals = [
-  {position: 10, value: 'Jim'},
-  {position: 40, value: 'Bill'},
-  {position: 70, value: 'Sally'}
-];
+const md = (markdown) => (DOM) => Rx.Observable.just(h('.markdown', {innerHTML: marked(markdown)}));
 
-const arrivalsReduced = [
-  {position: 10, value: ['Jim']},
-  {position: 40, value: ['Jim', 'Bill']},
-  {position: 70, value: ['Jim', 'Bill', 'Sally']}
-];
 
-function whatIsAnObservable () {
+function whatIsAnObservable (DOM) {
   const intro = md(`
 What on earth is an observable?
 ---
@@ -29,7 +20,7 @@ If arrays are data expressed over space:
     // x axis:      < ---  position --- >
 
 Observables are streams, data expressed over time:
-  `);
+  `)();
 
   const childrenOverTime = [
     {position: 27, value: 'Sally'},
@@ -41,51 +32,22 @@ Observables are streams, data expressed over time:
 
   const outtro = md(`
     // x axis:      < ---   time   --- >
-  `);
+  `)();
 
   return Rx.Observable.just(
     h('div', [intro, childrenOverTimeStream, outtro])
   );
 }
 
-function observableDemo () {
-  const stream = renderStreams(65, [arrivals]);
-  const counter$ = Rx.Observable.just(5);
+function whatCanYouDoWithThem (DOM) {
+  const counter$ = DOM.select('.click-me').events('click').map(_ => +1)
+    .startWith(0).scan(_.add, 0);
 
-  const intro = md(`
-Say we're having a party.
-We want to invite some guests. This is a list, so we can express it as an array.
-
-    var invitees = ['Jim', 'Bill', 'Sally'];
-
-We can express their arrivals over time as an observable stream!
-
-    var arrival$ = ...
-`);
-
-  return counter$.map((counter) => (
-    h('.test', [intro, stream])
-  ));
-}
-
-function observableDemoContinued () {
-  const preamble = md(`
-So, we have our \`arrivals$\`:
-  `);
-
-  const wantAList = md(`
-Let's say we want a list of all the party people after each arrives.
-
-    arrivals$.scan((partyPeople, arrival) => partyPeople.concat([arrival]), ())
-  `);
-
-  return Rx.Observable.just(
-    [
-      preamble,
-      renderStreams(65, [arrivals]),
-      wantAList,
-      renderStreams(65, [arrivals])
-    ]
+  return counter$.map(count =>
+    h('div', [
+      h('div', count.toString()),
+      h('button.click-me', 'Click me')
+    ])
   );
 }
 
@@ -127,8 +89,7 @@ Why should you care?
 * Cycle is built around observables
   `),
 
-  whatIsAnObservable(),
+  whatIsAnObservable,
 
-  observableDemo(),
-  observableDemoContinued()
+  whatCanYouDoWithThem
 ];

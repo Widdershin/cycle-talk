@@ -5,6 +5,8 @@ import _ from 'lodash';
 import {DOM} from 'rx-dom';
 const RxDOM = DOM;
 
+Rx.config.longStackSupport = true;
+
 import slideViews from './slide-views';
 
 function slideNavigation (slidePosition, totalSlides) {
@@ -64,12 +66,14 @@ export default function slides ({DOM}) {
   const slidePosition$ = Rx.Observable.merge(
     nextSlideButton$.merge(nextSlideKey$).map(_ => +1),
     previousSlideButton$.merge(previousSlideKey$).map(_ => -1)
-  ).scan(limit(_.add, {min: 0, max: slideViews.length - 1}), slideViews.length - 3)
-    .startWith(slideViews.length - 3);
+  ).scan(limit(_.add, {min: 0, max: slideViews.length - 1}), 0)
+    .startWith(0);
 
   const slide$$ = slidePosition$.map(position => slideViews[position]);
 
   return {
-    DOM: slide$$.switch().withLatestFrom(slidePosition$, slideDeckView)
+    DOM: slide$$.map(slide => slide(DOM))
+      .switch()
+      .withLatestFrom(slidePosition$, slideDeckView)
   };
 }
