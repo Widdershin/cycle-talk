@@ -119,3 +119,22 @@ blockquote {
 .count {
   margin: 10px;
 }
+
+.slide .time-travel {
+  position: relative;
+  overflow: hidden;
+}
+
+.slide .time-travel .stream-title {
+  position: absolute;
+}
+
+.slide .time-travel .stream-marker {
+  position: relative;
+}
+
+.slide .time-travel .stream-value {
+  font-size: 0.7em;
+}
+
+

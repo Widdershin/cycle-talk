@@ -3,6 +3,8 @@ import {h} from '@cycle/dom';
 import marked from 'marked';
 import renderStreams from './render-stream';
 
+import TimeTravel from 'cycle-time-travel';
+
 const _ = require('lodash');
 
 const md = (markdown) => (DOM) => Rx.Observable.just(h('.markdown', {innerHTML: marked(markdown)}));
@@ -40,13 +42,21 @@ Observables are streams, data expressed over time:
 }
 
 function whatCanYouDoWithThem (DOM) {
-  const counter$ = DOM.select('.click-me').events('click').map(_ => +1)
-    .startWith(0).scan(_.add, 0);
+  const click$ = DOM.select('.click-me').events('click').map(_ => 'Click!');
+  const clickValue$ = click$.map(_ => +1);
+  const counter$ = clickValue$.scan(_.add, 0).startWith(0);
 
-  return counter$.map(count =>
+  const timeTravel = TimeTravel(DOM, [
+    {stream: click$, label: 'click$'},
+    {stream: clickValue$, label: 'clickValue$'},
+    {stream: counter$, label: 'counter$'}
+  ]);
+
+  return Rx.Observable.combineLatest(timeTravel.timeTravel.counter$, timeTravel.DOM, (count, timeTravelBar) =>
     h('div', [
       h('div', count.toString()),
-      h('button.click-me', 'Click me')
+      h('button.click-me', 'Click me'),
+      timeTravelBar
     ])
   );
 }
