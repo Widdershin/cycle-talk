@@ -25,22 +25,26 @@ Observables are a data structure. They're comparable to arrays.
 
 If arrays are data expressed over space:
 
-    var children = ['Sally', 'Jim', 'Bob'];
+    var children = ['Sally', 'Jim', 'Bob', 'Jamie'];
     // x axis:      < ---  position --- >
 
-Observables are data expressed over time:
+Observables are streams, data expressed over time:
   `);
 
   const childrenOverTime = [
-    {position: 22, value: 'Sally'},
-    {position: 55, value: 'Jim'},
-    {position: 66, value: 'Bob'}
+    {position: 27, value: 'Sally'},
+    {position: 4, value: 'Jim'},
+    {position: 69, value: 'Bob'}
   ];
 
   const childrenOverTimeStream = renderStreams(null, [childrenOverTime], {start: 1998, end: 2003});
 
+  const outtro = md(`
+    // x axis:      < ---   time   --- >
+  `);
+
   return Rx.Observable.just(
-    h('div', [intro, childrenOverTimeStream])
+    h('div', [intro, childrenOverTimeStream, outtro])
   );
 }
 
