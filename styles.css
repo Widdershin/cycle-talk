@@ -20,7 +20,7 @@ body {
   background: #F0F0F0;
   box-shadow: 1px 2px 3px gray;
   border-radius: 2px;
-  padding: 30px 50px;
+  padding: 15px 50px;
   min-height: 12em;
   flex-grow: 1;
   margin: 60px;
@@ -146,12 +146,10 @@ blockquote {
 
 .example {
   text-align: center;
-  background: #663399;
-  color: white;
-  margin: 10px auto;
+  margin: 40px auto;
   padding: 10px;
   padding-bottom: 15px;
-  border-radius: 20px;
+  transform: scale(2);
 }
 
 .markdown p {

@@ -71,15 +71,24 @@ function counterExample (DOM) {
   const clickValue$ = click$.map(_ => +1);
   const counter$ = clickValue$.scan(_.add, 0).startWith(0);
 
+  const introText = `
+So we can express an event stream as an Observable.
+
+How can we build applications from that? Well this is where the functional programming part comes in to play.
+`;
+
+  const clickValueKey = '  .map(ev => 1)';
+  const counterKey = '  .scan(_.add, 0)';
+
   const timeTravel = TimeTravel(DOM, [
     {stream: click$, label: 'click$'},
-    {stream: clickValue$, label: 'clickValue$'},
-    {stream: counter$, label: 'counter$'}
+    {stream: clickValue$, label: clickValueKey},
+    {stream: counter$, label: counterKey}
   ]);
 
-  return Rx.Observable.combineLatest(timeTravel.timeTravel.counter$, timeTravel.DOM, (count, timeTravelBar) =>
+  return Rx.Observable.combineLatest(timeTravel.timeTravel[counterKey], timeTravel.DOM, (count, timeTravelBar) =>
     h('.contents', [
-      md(introText)(DOM),
+      md(introText)(),
       h('.example', [
         h('button.click-me', 'Click me!'),
         h('div', count.toString())
@@ -129,5 +138,7 @@ Why should you care?
 
   whatIsAnObservable,
 
-  whatCanYouDoWithThem
+  whatCanYouDoWithThem,
+
+  counterExample
 ];
