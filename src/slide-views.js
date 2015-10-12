@@ -107,7 +107,7 @@ function jsBin (url) {
 }
 
 function todoJquery (DOM) {
-  return Rx.Observable.just(jsBin('http://jsbin.com/vizurixexi/edit?js,output'));
+  return Rx.Observable.just(jsBin('http://jsbin.com/hubina/edit?js,output'));
 }
 
 export default [
