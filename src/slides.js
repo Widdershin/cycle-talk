@@ -57,10 +57,10 @@ export default function slides ({DOM}) {
   const nextSlideButton$ = DOM.select('.next-slide').events('click');
   const previousSlideButton$ = DOM.select('.previous-slide').events('click');
 
-  const nextSlideKey$ = RxDOM.fromEvent(document.body, 'keypress')
+  const nextSlideKey$ = RxDOM.fromEvent(document, 'keydown')
     .filter(keyIs('ArrowRight', 'Space'));
 
-  const previousSlideKey$ = RxDOM.fromEvent(document.body, 'keypress')
+  const previousSlideKey$ = RxDOM.fromEvent(document, 'keydown')
     .filter(keyIs('ArrowLeft'));
 
   // for development
