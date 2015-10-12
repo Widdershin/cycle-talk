@@ -98,6 +98,18 @@ How can we build applications from that? Well this is where the functional progr
   );
 }
 
+function jsBin (url) {
+  return (
+    h('.jsbin', [
+      h('iframe', {src: url})
+    ])
+  );
+}
+
+function todoJquery (DOM) {
+  return Rx.Observable.just(jsBin('http://jsbin.com/vizurixexi/edit?js,output'));
+}
+
 export default [
   md(`
 Welcome to our live coding Cycle.js adventure!
@@ -145,5 +157,5 @@ Why should you care?
 
   counterExample,
 
-
+  todoJquery
 ];
