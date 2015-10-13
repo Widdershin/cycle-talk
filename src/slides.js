@@ -64,7 +64,7 @@ export default function slides ({DOM}) {
     .filter(keyIs('ArrowLeft'));
 
   // for development
-  const startingSlide = slideViews.length - 1;
+  const startingSlide = 0;
 
   const slidePosition$ = Rx.Observable.merge(
     nextSlideButton$.merge(nextSlideKey$).map(_ => +1),
