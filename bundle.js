@@ -46984,11 +46984,11 @@ var md = function md(markdown) {
 };
 
 function whatIsAnObservable(DOM) {
-  var intro = md('\nWhat on earth is an observable?\n---\nObservables are a data structure. They\'re comparable to arrays.\n\nIf arrays are data expressed over space:\n\n    var children = [\'Sally\', \'Jim\', \'Bob\', \'Jamie\'];\n    // x axis:      < ---  position --- >\n\nObservables are streams, data expressed over time:\n  ')();
+  var intro = md('\nWhat on earth is an observable?\n---\nObservables are a data structure. They\'re comparable to arrays.\n\n<br>\n\nIf arrays are data expressed over space:\n\n    var children = [\'Sally\', \'Jim\', \'Bob\', \'Jamie\'];\n    // x axis:      < ---  position --- >\n\n<br>\n\nObservables are streams, data expressed over time:\n  ')();
 
-  var childrenOverTime = [{ position: 27, value: 'Sally' }, { position: 4, value: 'Jim' }, { position: 69, value: 'Bob' }];
+  var childrenOverTime = [{ position: 4, value: 'Sally' }, { position: 27, value: 'Jim' }, { position: 69, value: 'Bob' }, { position: 91, value: 'Jamie' }];
 
-  var childrenOverTimeStream = (0, _renderStream2['default'])(null, [childrenOverTime], { start: 1998, end: 2003 });
+  var childrenOverTimeStream = (0, _renderStream2['default'])(null, [childrenOverTime], { start: 1995, end: 2003 });
 
   var outtro = md('\n    // x axis:      < ---   time   --- >\n  ')();
 
@@ -47029,7 +47029,21 @@ function counterExample(DOM) {
   });
 }
 
-exports['default'] = [md('\nWelcome to our live coding Cycle.js adventure!\n---\n\nWhat we\'re going to cover:\n\n* What is Cycle.js?\n* Why should you care?\n* How does it compare to say, jQuery or React?\n  '), md('\nCycle.js is ...\n---\n\n* A tool for building javascript applications, written by Andre Staltz (@staltz)\n* Akin to tools like React or Elm\n* Very fun to build apps in\n  '), md('\nAnother framework?\n---\n> "Fool!" says the wizard. "Do you think I want to learn yet another framework?"\n\nI think in this case, you actually might.\n  '), md('\nWhy should you care?\n---\n\n* Cycle is a way of building reactive apps using functional programming\n* It\'s a fundamentally different way of thinking about building apps\n* Cycle is built around observables\n  '), whatIsAnObservable, whatCanYouDoWithThem, counterExample];
+function jsBin(url) {
+  return (0, _cycleDom.h)('.jsbin', [(0, _cycleDom.h)('iframe', { src: url })]);
+}
+
+function todoJquery(DOM) {
+  return _cycleCore.Rx.Observable.just(jsBin('http://jsbin.com/jitucaq/edit?js,output'));
+}
+
+function introToCycle(DOM) {
+  var introText = 'So what does a Cycle app actually look like?';
+
+  return _cycleCore.Rx.Observable.just((0, _cycleDom.h)('div', [md(introText)(DOM), jsBin('http://jsbin.com/duqemu/edit?js,output')]));
+}
+
+exports['default'] = [md('\nWelcome to our live coding Cycle.js adventure!\n---\n\nWhat we\'re going to cover:\n\n* What is Cycle.js?\n* Why should you care?\n* How does it compare to say, jQuery or React?\n* How do you build apps in Cycle.js?\n  '), md('\nCycle.js is ...\n---\n\n* A tool for building javascript applications, written by Andre Staltz (@staltz)\n* Similar in nature to React or Elm\n* Extremely fun to build apps with\n\n![cycle logo](http://cycle.js.org/img/cyclejs_logo.svg)\n  '), md('\n> "Fool!" says the wizard. "Do you think I want to learn yet another framework?"\n\n![grumpy cat](/images/grumpy-wizard-cat.jpg)\n\nI think in this case, you actually might.\n  '), md('\nWhy should you care?\n---\n\n* Cycle is a way of building reactive apps using functional programming\n* It\'s a fundamentally different way of thinking about building UIs\n* Cycle is built around observables\n  '), whatIsAnObservable, whatCanYouDoWithThem, counterExample, introToCycle, todoJquery];
 module.exports = exports['default'];
 
 },{"./render-stream":136,"@cycle/core":2,"@cycle/dom":6,"cycle-time-travel":127,"lodash":131,"marked":132}],138:[function(require,module,exports){
@@ -47068,7 +47082,7 @@ function slideNavigation(slidePosition, totalSlides) {
     return slidePosition === totalSlides - 1;
   };
 
-  return (0, _cycleDom.h)('.slide-navigation', [(0, _cycleDom.h)('button.previous-slide', { disabled: showingFirstSlide() }, 'Previous'), (0, _cycleDom.h)('.slide-position', 'Slide #' + (slidePosition + 1) + '/' + totalSlides), (0, _cycleDom.h)('button.next-slide', { disabled: showingLastSlide() }, 'Next')]);
+  return (0, _cycleDom.h)('.slide-navigation', [(0, _cycleDom.h)('button.previous-slide', { disabled: showingFirstSlide() }, 'Previous'), (0, _cycleDom.h)('.slide-position', 'Slide #' + slidePosition + '/' + (totalSlides - 1)), (0, _cycleDom.h)('button.next-slide', { disabled: showingLastSlide() }, 'Next')]);
 }
 
 function slideDeckView(slide, slidePosition) {
@@ -47110,18 +47124,21 @@ function slides(_ref2) {
   var nextSlideButton$ = DOM.select('.next-slide').events('click');
   var previousSlideButton$ = DOM.select('.previous-slide').events('click');
 
-  var nextSlideKey$ = RxDOM.fromEvent(document.body, 'keypress').filter(keyIs('ArrowRight', 'Space'));
+  var nextSlideKey$ = RxDOM.fromEvent(document, 'keydown').filter(keyIs('ArrowRight', 'Space'));
 
-  var previousSlideKey$ = RxDOM.fromEvent(document.body, 'keypress').filter(keyIs('ArrowLeft'));
+  var previousSlideKey$ = RxDOM.fromEvent(document, 'keydown').filter(keyIs('ArrowLeft'));
 
-  // for development
-  var startingSlide = 0;
+  var startingSlide = parseInt(location.hash.slice(1), 10) || 0;
 
   var slidePosition$ = _cycleCore.Rx.Observable.merge(nextSlideButton$.merge(nextSlideKey$).map(function (_) {
     return +1;
   }), previousSlideButton$.merge(previousSlideKey$).map(function (_) {
     return -1;
   })).scan(limit(_lodash2['default'].add, { min: 0, max: _slideViews2['default'].length - 1 }), startingSlide).startWith(startingSlide).distinctUntilChanged();
+
+  slidePosition$.forEach(function (position) {
+    return history.pushState({ position: position }, position.toString(), '#' + position);
+  });
 
   var slide$$ = slidePosition$.map(function (position) {
     return _slideViews2['default'][position];
