@@ -16,7 +16,7 @@ function slideNavigation (slidePosition, totalSlides) {
   return (
     h('.slide-navigation', [
       h('button.previous-slide', {disabled: showingFirstSlide()}, 'Previous'),
-      h('.slide-position', `Slide #${slidePosition + 1}/${totalSlides}`),
+      h('.slide-position', `Slide #${slidePosition}/${totalSlides - 1}`),
       h('button.next-slide', {disabled: showingLastSlide()}, 'Next')
     ])
   );
@@ -63,8 +63,7 @@ export default function slides ({DOM}) {
   const previousSlideKey$ = RxDOM.fromEvent(document, 'keydown')
     .filter(keyIs('ArrowLeft'));
 
-  // for development
-  const startingSlide = 0;
+  const startingSlide = parseInt(location.hash.slice(1), 10) || 0;
 
   const slidePosition$ = Rx.Observable.merge(
     nextSlideButton$.merge(nextSlideKey$).map(_ => +1),
@@ -72,6 +71,10 @@ export default function slides ({DOM}) {
   ).scan(limit(_.add, {min: 0, max: slideViews.length - 1}), startingSlide)
     .startWith(startingSlide)
     .distinctUntilChanged();
+
+  slidePosition$.forEach(position =>
+    history.pushState({position}, position.toString(), `#${position}`)
+  );
 
   const slide$$ = slidePosition$.map(position => slideViews[position]);
 
