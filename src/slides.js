@@ -76,10 +76,12 @@ export default function slides ({DOM}) {
     history.pushState({position}, position.toString(), `#${position}`)
   );
 
-  const slide$$ = slidePosition$.map(position => slideViews[position]);
+  const slideViewsMapped = slideViews.map(slide => slide(DOM));
+
+  const slide$$ = slidePosition$.map(position => slideViewsMapped[position]);
 
   return {
-    DOM: slide$$.map(slide => slide(DOM))
+    DOM: slide$$
       .switch()
       .withLatestFrom(slidePosition$, slideDeckView)
   };
