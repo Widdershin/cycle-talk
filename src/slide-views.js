@@ -129,6 +129,43 @@ function counterFullExample (DOM) {
   );
 }
 
+const reactComparison = `
+  How does Cycle.js compare to React?
+  ----
+
+  React and Cycle have similar goals.
+
+  * Unidirectional data flow
+  * Avoid side effects
+  * Virtual DOM
+
+  In fact, there is an [implementation of Cycle in React](https://github.com/pH200/cycle-react).
+`;
+
+const fluxVsRx = `
+  So what's the difference?
+  ----
+
+  React doesn't come with a pure solution for reactive data flow.
+
+  Cycle does (Rx Observables).
+
+  However, React has Flux.
+
+  Flux is slightly controversial. It solves the problem of unidirectional data flow, but some people still don't like the taste.
+
+  One of the more popular Flux implementations, redux, is quite similar to writing Cycle apps with RxJS.
+`;
+
+const jQueryComparison = `
+  How does Cycle.js compare to jQuery?
+  ----
+
+  This isn't really a fair comparison, but there are a lot of small apps in the world written primarily with jQuery.
+
+  So, I figured I would make a simple application in jQuery and then rewrite it in Cycle.js.
+`;
+
 export default [
   md(`
 Welcome to our live coding Cycle.js adventure!
@@ -179,6 +216,12 @@ Why should you care?
   introToCycle,
 
   counterFullExample,
+
+  md(reactComparison),
+
+  md(fluxVsRx),
+
+  md(jQueryComparison),
 
   todoJquery
 ];
