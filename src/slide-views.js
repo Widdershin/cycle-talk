@@ -150,7 +150,7 @@ Cycle.js is ...
 * Similar in nature to React or Elm
 * Extremely fun to build apps with
 
-![cycle logo](http://cycle.js.org/img/cyclejs_logo.svg)
+![cycle logo](images/cyclejs_logo.svg)
   `),
 
   md(`
