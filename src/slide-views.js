@@ -150,7 +150,7 @@ Cycle.js is ...
   md(`
 > "Fool!" says the wizard. "Do you think I want to learn yet another framework?"
 
-![grumpy cat](/images/grumpy-wizard-cat.jpg)
+![grumpy cat](images/grumpy-wizard-cat.jpg)
 
 I think in this case, you actually might.
   `),
