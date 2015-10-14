@@ -110,6 +110,14 @@ function todoJquery (DOM) {
   return Rx.Observable.just(jsBin('http://jsbin.com/jitucaq/edit?js,output'));
 }
 
+function introToCycle (DOM) {
+  const introText = 'So what does a Cycle app actually look like?'
+
+  return Rx.Observable.just(
+    h('div', [md(introText)(DOM), jsBin('http://jsbin.com/duqemu/edit?js,output')])
+  );
+}
+
 export default [
   md(`
 Welcome to our live coding Cycle.js adventure!
@@ -156,6 +164,8 @@ Why should you care?
   whatCanYouDoWithThem,
 
   counterExample,
+
+  introToCycle,
 
   todoJquery
 ];
