@@ -123,6 +123,12 @@ function introToCycle (DOM) {
   );
 }
 
+function counterFullExample (DOM) {
+  return Rx.Observable.just(
+    jsBin('http://jsbin.com/balohe/edit?js,output')
+  );
+}
+
 export default [
   md(`
 Welcome to our live coding Cycle.js adventure!
@@ -171,6 +177,8 @@ Why should you care?
   counterExample,
 
   introToCycle,
+
+  counterFullExample,
 
   todoJquery
 ];
