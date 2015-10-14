@@ -16,21 +16,26 @@ What on earth is an observable?
 ---
 Observables are a data structure. They're comparable to arrays.
 
+<br>
+
 If arrays are data expressed over space:
 
     var children = ['Sally', 'Jim', 'Bob', 'Jamie'];
     // x axis:      < ---  position --- >
 
+<br>
+
 Observables are streams, data expressed over time:
   `)();
 
   const childrenOverTime = [
-    {position: 27, value: 'Sally'},
-    {position: 4, value: 'Jim'},
-    {position: 69, value: 'Bob'}
+    {position: 4, value: 'Sally'},
+    {position: 27, value: 'Jim'},
+    {position: 69, value: 'Bob'},
+    {position: 91, value: 'Jamie'}
   ];
 
-  const childrenOverTimeStream = renderStreams(null, [childrenOverTime], {start: 1998, end: 2003});
+  const childrenOverTimeStream = renderStreams(null, [childrenOverTime], {start: 1995, end: 2003});
 
   const outtro = md(`
     // x axis:      < ---   time   --- >
@@ -136,7 +141,7 @@ Cycle.js is ...
 ---
 
 * A tool for building javascript applications, written by Andre Staltz (@staltz)
-* Akin to tools like React or Elm
+* Similar in nature to React or Elm
 * Extremely fun to build apps with
 
 ![cycle logo](http://cycle.js.org/img/cyclejs_logo.svg)
@@ -155,7 +160,7 @@ Why should you care?
 ---
 
 * Cycle is a way of building reactive apps using functional programming
-* It's a fundamentally different way of thinking about building apps
+* It's a fundamentally different way of thinking about building UIs
 * Cycle is built around observables
   `),
 
