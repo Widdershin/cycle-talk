@@ -166,6 +166,10 @@ const jQueryComparison = `
   So, I figured I would make a simple application in jQuery and then rewrite it in Cycle.js.
 `;
 
+function todoCycle (DOM) {
+  return Rx.Observable.just(jsBin('http://jsbin.com/xigoji/edit?js,output'));
+}
+
 export default [
   md(`
 Welcome to our live coding Cycle.js adventure!
@@ -223,5 +227,7 @@ Why should you care?
 
   md(jQueryComparison),
 
-  todoJquery
+  todoJquery,
+
+  todoCycle
 ];
