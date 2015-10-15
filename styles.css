@@ -1,5 +1,10 @@
 @import url(https://fonts.googleapis.com/css?family=PT+Sans);
 
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
 body {
   font-family: 'PT Sans';
   margin: 0;
@@ -16,16 +21,10 @@ body {
 }
 
 .slide {
-  border: 1px solid lightgray;
-  background: #F0F0F0;
-  box-shadow: 1px 2px 3px gray;
-  border-radius: 2px;
-  padding: 20px;
-  height: 12em;
   flex-grow: 1;
   margin: 60px;
   font-size: 1.5em;
-  width: 80%;
+  width: 90%;
 }
 
 .slide-navigation {
