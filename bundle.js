@@ -47043,7 +47043,17 @@ function introToCycle(DOM) {
   return _cycleCore.Rx.Observable.just((0, _cycleDom.h)('div', [md(introText)(DOM), jsBin('http://jsbin.com/duqemu/edit?js,output')]));
 }
 
-exports['default'] = [md('\nWelcome to our live coding Cycle.js adventure!\n---\n\nWhat we\'re going to cover:\n\n* What is Cycle.js?\n* Why should you care?\n* How does it compare to say, jQuery or React?\n* How do you build apps in Cycle.js?\n  '), md('\nCycle.js is ...\n---\n\n* A tool for building javascript applications, written by Andre Staltz (@staltz)\n* Similar in nature to React or Elm\n* Extremely fun to build apps with\n\n![cycle logo](http://cycle.js.org/img/cyclejs_logo.svg)\n  '), md('\n> "Fool!" says the wizard. "Do you think I want to learn yet another framework?"\n\n![grumpy cat](images/grumpy-wizard-cat.jpg)\n\nI think in this case, you actually might.\n  '), md('\nWhy should you care?\n---\n\n* Cycle is a way of building reactive apps using functional programming\n* It\'s a fundamentally different way of thinking about building UIs\n* Cycle is built around observables\n  '), whatIsAnObservable, whatCanYouDoWithThem, counterExample, introToCycle, todoJquery];
+function counterFullExample(DOM) {
+  return _cycleCore.Rx.Observable.just(jsBin('http://jsbin.com/balohe/edit?js,output'));
+}
+
+var reactComparison = '\n  How does Cycle.js compare to React?\n  ----\n\n  React and Cycle have similar goals.\n\n  * Unidirectional data flow\n  * Avoid side effects\n  * Virtual DOM\n\n  In fact, there is an [implementation of Cycle in React](https://github.com/pH200/cycle-react).\n';
+
+var fluxVsRx = '\n  So what\'s the difference?\n  ----\n\n  React doesn\'t come with a pure solution for reactive data flow.\n\n  Cycle does (Rx Observables).\n\n  However, React has Flux.\n\n  Flux is slightly controversial. It solves the problem of unidirectional data flow, but some people still don\'t like the taste.\n\n  One of the more popular Flux implementations, redux, is quite similar to writing Cycle apps with RxJS.\n';
+
+var jQueryComparison = '\n  How does Cycle.js compare to jQuery?\n  ----\n\n  This isn\'t really a fair comparison, but there are a lot of small apps in the world written primarily with jQuery.\n\n  So, I figured I would make a simple application in jQuery and then rewrite it in Cycle.js.\n';
+
+exports['default'] = [md('\nWelcome to our live coding Cycle.js adventure!\n---\n\nWhat we\'re going to cover:\n\n* What is Cycle.js?\n* Why should you care?\n* How does it compare to say, jQuery or React?\n* How do you build apps in Cycle.js?\n  '), md('\nCycle.js is ...\n---\n\n* A tool for building javascript applications, written by Andre Staltz (@staltz)\n* Similar in nature to React or Elm\n* Extremely fun to build apps with\n\n![cycle logo](images/cyclejs_logo.svg)\n  '), md('\n> "Fool!" says the wizard. "Do you think I want to learn yet another framework?"\n\n![grumpy cat](images/grumpy-wizard-cat.jpg)\n\nI think in this case, you actually might.\n  '), md('\nWhy should you care?\n---\n\n* Cycle is a way of building reactive apps using functional programming\n* It\'s a fundamentally different way of thinking about building UIs\n* Cycle is built around observables\n  '), whatIsAnObservable, whatCanYouDoWithThem, counterExample, introToCycle, counterFullExample, md(reactComparison), md(fluxVsRx), md(jQueryComparison), todoJquery];
 module.exports = exports['default'];
 
 },{"./render-stream":136,"@cycle/core":2,"@cycle/dom":6,"cycle-time-travel":127,"lodash":131,"marked":132}],138:[function(require,module,exports){
@@ -47140,14 +47150,16 @@ function slides(_ref2) {
     return history.pushState({ position: position }, position.toString(), '#' + position);
   });
 
+  var slideViewsMapped = _slideViews2['default'].map(function (slide) {
+    return slide(DOM);
+  });
+
   var slide$$ = slidePosition$.map(function (position) {
-    return _slideViews2['default'][position];
+    return slideViewsMapped[position];
   });
 
   return {
-    DOM: slide$$.map(function (slide) {
-      return slide(DOM);
-    })['switch']().withLatestFrom(slidePosition$, slideDeckView)
+    DOM: slide$$['switch']().withLatestFrom(slidePosition$, slideDeckView)
   };
 }
 
