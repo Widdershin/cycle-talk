@@ -172,16 +172,27 @@ function todoCycle (DOM) {
 
 export default [
   md(`
-Welcome to our live coding Cycle.js adventure!
+From jQuery to Cycle
+===
+
+Live Coding Extravaganza
 ---
 
-What we're going to cover:
+
+Presented by Nick Johnstone
+  `),
+
+  md(`
+What we're going to cover
+---
 
 * What is Cycle.js?
 * Why should you care?
 * How does it compare to say, jQuery or React?
 * How do you build apps in Cycle.js?
   `),
+
+  md(`Feel free to yell out questions.`),
 
   md(`
 Cycle.js is ...
