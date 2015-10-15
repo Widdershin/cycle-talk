@@ -24,7 +24,7 @@ function slideNavigation (slidePosition, totalSlides) {
 
 function slideDeckView (slide, slidePosition) {
   return (
-    h('.slide-deck', [
+    h('.slide-deck' + `.slide-${slidePosition}`, [
       h('.slide', [slide]),
       slideNavigation(slidePosition, slideViews.length)
     ])
