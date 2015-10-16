@@ -46984,7 +46984,7 @@ var md = function md(markdown) {
 };
 
 function whatIsAnObservable(DOM) {
-  var intro = md('\nWhat on earth is an observable?\n---\nObservables are a data structure. They\'re comparable to arrays.\n\n<br>\n\nIf arrays are data expressed over space:\n\n    var children = [\'Sally\', \'Jim\', \'Bob\', \'Jamie\'];\n    // x axis:      < ---  position --- >\n\n<br>\n\nObservables are streams, data expressed over time:\n  ')();
+  var intro = md('\nWhat on earth is an observable?\n---\nObservables are a data structure. They\'re comparable to arrays.\n\nIf arrays are data expressed over space:\n\n    var children = [\'Sally\', \'Jim\', \'Bob\', \'Jamie\'];\n    // x axis:      < ---  position --- >\n<br>\nObservables are streams, data expressed over time:\n  ')();
 
   var childrenOverTime = [{ position: 4, value: 'Sally' }, { position: 27, value: 'Jim' }, { position: 69, value: 'Bob' }, { position: 91, value: 'Jamie' }];
 
@@ -47053,7 +47053,17 @@ var fluxVsRx = '\n  So what\'s the difference?\n  ----\n\n  React doesn\'t come 
 
 var jQueryComparison = '\n  How does Cycle.js compare to jQuery?\n  ----\n\n  This isn\'t really a fair comparison, but there are a lot of small apps in the world written primarily with jQuery.\n\n  So, I figured I would make a simple application in jQuery and then rewrite it in Cycle.js.\n';
 
-exports['default'] = [md('\nWelcome to our live coding Cycle.js adventure!\n---\n\nWhat we\'re going to cover:\n\n* What is Cycle.js?\n* Why should you care?\n* How does it compare to say, jQuery or React?\n* How do you build apps in Cycle.js?\n  '), md('\nCycle.js is ...\n---\n\n* A tool for building javascript applications, written by Andre Staltz (@staltz)\n* Similar in nature to React or Elm\n* Extremely fun to build apps with\n\n![cycle logo](images/cyclejs_logo.svg)\n  '), md('\n> "Fool!" says the wizard. "Do you think I want to learn yet another framework?"\n\n![grumpy cat](images/grumpy-wizard-cat.jpg)\n\nI think in this case, you actually might.\n  '), md('\nWhy should you care?\n---\n\n* Cycle is a way of building reactive apps using functional programming\n* It\'s a fundamentally different way of thinking about building UIs\n* Cycle is built around observables\n  '), whatIsAnObservable, whatCanYouDoWithThem, counterExample, introToCycle, counterFullExample, md(reactComparison), md(fluxVsRx), md(jQueryComparison), todoJquery];
+function todoCycle(DOM) {
+  return _cycleCore.Rx.Observable.just(jsBin('http://jsbin.com/xigoji/edit?js,output'));
+}
+
+var conclusion = md('\n  In conclusion\n  ----\n\n  * Cycle.js is fun and not that scary\n  * Observables are coming, and that\'s a good thing\n  * Try out reactive programming! Be it React, Cycle, Elm or anything else\n');
+
+var questions = md('\n  Questions?\n  ====\n');
+
+var whoAmI = md('\n  Thanks for watching\n  ----\n  Presented by Nick Johnstone\n\n  I work for Powershop during the day, and create monstrosities with Javascript at night.\n\n  * Twitter: @widdnz\n\n  * Github: Widdershin\n\n  If you want to check out these slides, they\'re live at [widdersh.in/cycle-talk](http://widdersh.in/cycle-talk)\n');
+
+exports['default'] = [md('\nFrom jQuery to Cycle\n===\n\nLive Coding Extravaganza\n---\n\n\nPresented by Nick Johnstone\n  '), md('\nWhat we\'re going to cover\n---\n\n* What is Cycle.js?\n* Why should you care?\n* How does it compare to say, jQuery or React?\n* How do you build apps in Cycle.js?\n  '), md('Feel free to yell out questions.'), md('\nCycle.js is ...\n---\n\n* A tool for building javascript applications, written by Andre Staltz (@staltz)\n* Similar in nature to React or Elm\n* Extremely fun to build apps with\n\n![cycle logo](images/cyclejs_logo.svg)\n  '), md('\n> "Fool!" says the wizard. "Do you think I want to learn yet another framework?"\n\n![grumpy cat](images/grumpy-wizard-cat.jpg)\n\nI think in this case, you actually might.\n  '), md('\nWhy should you care?\n---\n\n* Cycle is a way of building reactive apps using functional programming\n* It\'s a fundamentally different way of thinking about building UIs\n* Cycle is built around observables\n  '), whatIsAnObservable, whatCanYouDoWithThem, counterExample, introToCycle, counterFullExample, md(reactComparison), md(fluxVsRx), md(jQueryComparison), todoJquery, todoCycle, conclusion, whoAmI, questions];
 module.exports = exports['default'];
 
 },{"./render-stream":136,"@cycle/core":2,"@cycle/dom":6,"cycle-time-travel":127,"lodash":131,"marked":132}],138:[function(require,module,exports){
@@ -47096,7 +47106,7 @@ function slideNavigation(slidePosition, totalSlides) {
 }
 
 function slideDeckView(slide, slidePosition) {
-  return (0, _cycleDom.h)('.slide-deck', [(0, _cycleDom.h)('.slide', [slide]), slideNavigation(slidePosition, _slideViews2['default'].length)]);
+  return (0, _cycleDom.h)('.slide-deck' + ('.slide-' + slidePosition), [(0, _cycleDom.h)('.slide', [slide]), slideNavigation(slidePosition, _slideViews2['default'].length)]);
 }
 
 function limit(operator, _ref) {
