@@ -16,15 +16,11 @@ What on earth is an observable?
 ---
 Observables are a data structure. They're comparable to arrays.
 
-<br>
-
 If arrays are data expressed over space:
 
     var children = ['Sally', 'Jim', 'Bob', 'Jamie'];
     // x axis:      < ---  position --- >
-
 <br>
-
 Observables are streams, data expressed over time:
   `)();
 

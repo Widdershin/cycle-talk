@@ -8,8 +8,8 @@ html, body {
 body {
   font-family: 'PT Sans';
   margin: 0;
-  background: #F9F9F9;
-  color: #242424;
+  background: #0297FF;
+  color: white;
 }
 
 .slide-deck {
@@ -17,14 +17,12 @@ body {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  min-height: 40em;;
-  max-height: 50em;
+  height: 47em;
 }
 
 .slide {
   flex-grow: 1;
-  margin: 40px;
-  font-size: 1.5em;
+  font-size: 2em;
   width: 90%;
   padding: 20px;
   opacity: 0.87;
@@ -42,7 +40,7 @@ body {
 }
 
 blockquote {
-  color: gray;
+  color: lightgray;
   border-left: 2px solid lightgray;
   padding: 0px 10px;
   margin-bottom: 30px;
@@ -184,6 +182,3 @@ iframe {
   border: 1px solid lightgray;
 }
 
-iframe[src="http://jsbin.com/duqemu/edit?js,output"] {
-  height: 17em;
-}
