@@ -170,6 +170,20 @@ function todoCycle (DOM) {
   return Rx.Observable.just(jsBin('http://jsbin.com/xigoji/edit?js,output'));
 }
 
+const conclusion = md(`
+  In conclusion
+  ----
+
+  * Cycle.js is fun and not that scary
+  * Observables are coming, and that's a good thing
+  * Try out reactive programming! Be it React, Cycle, Elm or anything else
+`);
+
+const questions = md(`
+  Questions?
+  ====
+`);
+
 export default [
   md(`
 From jQuery to Cycle
@@ -240,5 +254,9 @@ Why should you care?
 
   todoJquery,
 
-  todoCycle
+  todoCycle,
+
+  conclusion,
+
+  questions
 ];
