@@ -184,6 +184,20 @@ const questions = md(`
   ====
 `);
 
+const whoAmI = md(`
+  Thanks for watching
+  ----
+  Presented by Nick Johnstone (in case you forgot)
+
+  I work for Powershop during the day, and create monstrosities with Javascript at night.
+
+  * Twitter: @widdnz
+
+  * Github: Widdershin
+
+  If you want to check out these slides, they're live at [widdersh.in/cycle-talk](http://widdersh.in/cycle-talk)
+`);
+
 export default [
   md(`
 From jQuery to Cycle
@@ -257,6 +271,8 @@ Why should you care?
   todoCycle,
 
   conclusion,
+
+  whoAmI,
 
   questions
 ];
