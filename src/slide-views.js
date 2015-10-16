@@ -187,7 +187,7 @@ const questions = md(`
 const whoAmI = md(`
   Thanks for watching
   ----
-  Presented by Nick Johnstone (in case you forgot)
+  Presented by Nick Johnstone
 
   I work for Powershop during the day, and create monstrosities with Javascript at night.
 
