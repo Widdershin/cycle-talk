@@ -22,10 +22,9 @@ body {
 
 .slide {
   flex-grow: 1;
-  font-size: 2em;
+  font-size: 2.3em;
   width: 90%;
   padding: 20px;
-  opacity: 0.87;
 }
 
 .slide-navigation {
