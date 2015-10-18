@@ -47054,14 +47054,14 @@ var fluxVsRx = '\n  So what\'s the difference?\n  ----\n\n  React doesn\'t come 
 var jQueryComparison = '\n  How does Cycle.js compare to jQuery?\n  ----\n\n  This isn\'t really a fair comparison, but there are a lot of small apps in the world written primarily with jQuery.\n\n  So, I figured I would make a simple application in jQuery and then rewrite it in Cycle.js.\n';
 
 function todoCycle(DOM) {
-  return _cycleCore.Rx.Observable.just(jsBin('http://jsbin.com/xigoji/edit?js,output'));
+  return _cycleCore.Rx.Observable.just(md('Livecoding Fun Time!\n---')(DOM));;
 }
 
 var conclusion = md('\n  In conclusion\n  ----\n\n  * Cycle.js is fun and not that scary\n  * Observables are coming, and that\'s a good thing\n  * Try out reactive programming! Be it React, Cycle, Elm or anything else\n');
 
 var questions = md('\n  Questions?\n  ====\n');
 
-var whoAmI = md('\n  Thanks for watching\n  ----\n  Presented by Nick Johnstone\n\n  I work for [Powershop](http://powershop.com/) during the day, and [create monstrosities](http://helix-pi.net) with Javascript at night.\n\n  * Twitter: [@widdnz](https://twitter.com/widdnz)\n  * Github: [Widdershin](https://github.com/Widdershin)\n  * Blog: [widdersh.in](http://widdersh.in/)\n\n  If you want to check out these slides, they\'re live at [widdersh.in/cycle-talk](http://widdersh.in/cycle-talk)\n');
+var whoAmI = md('\n  Thanks for watching\n  ----\n  Presented by Nick Johnstone\n\n  I work for [Powershop](http://powershop.com/) during the day, and [make strange contraptions](http://helix-pi.net) with Javascript at night.\n\n  * Twitter: [@widdnz](https://twitter.com/widdnz)\n  * Github: [Widdershin](https://github.com/Widdershin)\n  * Blog: [widdersh.in](http://widdersh.in/)\n\n  If you want to check out these slides, they\'re live at [widdersh.in/cycle-talk](http://widdersh.in/cycle-talk)\n');
 
 exports['default'] = [md('\nFrom jQuery to Cycle.js\n===\n\nLive Coding Extravaganza\n---\n\n\nPresented by Nick Johnstone\n  '), md('\nWhat we\'re going to cover\n---\n\n* What is Cycle.js?\n* Why should you care?\n* How does it compare to say, jQuery or React?\n* How do you build apps in Cycle.js?\n  '), md('Feel free to yell out questions\n---'), md('\nCycle.js is ...\n---\n\n* A tool for building javascript applications, written by Andre Staltz (@staltz)\n* Similar in nature to React or Elm\n* Extremely fun to build apps with\n* More of an architecture pattern than a framework\n\n![cycle logo](images/cyclejs_logo.svg)\n  '), md('\n> "Fool!" says the wizard. "Do you think I want to learn yet another framework?"\n\n![grumpy cat](images/grumpy-wizard-cat.jpg)\n\nI think in this case, you actually might.\n  '), md('\nWhy should you care?\n---\n\n* Cycle is a way of building reactive apps using functional programming\n* It\'s a fundamentally different way of thinking about building UIs\n* Cycle is built around observables and pure functions\n* It\'s really fun\n  '), whatIsAnObservable, whatCanYouDoWithThem, counterExample, introToCycle, counterFullExample, md(reactComparison), md(fluxVsRx), md(jQueryComparison), todoJquery, todoCycle, conclusion, whoAmI, questions];
 module.exports = exports['default'];
