@@ -170,6 +170,10 @@ blockquote {
   margin-bottom: 0px;
 }
 
+.markdown li {
+  margin-bottom: 30px;
+}
+
 .slide p img  {
   margin: auto;
   display: flex;
