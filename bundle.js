@@ -46984,9 +46984,9 @@ var md = function md(markdown) {
 };
 
 function whatIsAnObservable(DOM) {
-  var intro = md('\nWhat on earth is an observable?\n---\nObservables are a data structure. They\'re comparable to arrays.\n\nIf arrays are data expressed over space:\n\n    var children = [\'Sally\', \'Jim\', \'Bob\', \'Jamie\'];\n    // x axis:      < ---  position --- >\n<br>\nObservables are streams, data expressed over time:\n  ')();
+  var intro = md('\nWhat on earth is an observable?\n---\nObservables are a data structure. They\'re comparable to arrays.\n\nIf arrays are data expressed over space:\n\n    var children = [\'Rosa\', \'Sylvia\', \'Hugo\', \'Jamie\'];\n    // x axis:      < ---  position --- >\n<br>\nObservables are streams, data expressed over time:\n  ')();
 
-  var childrenOverTime = [{ position: 4, value: 'Sally' }, { position: 27, value: 'Jim' }, { position: 69, value: 'Bob' }, { position: 91, value: 'Jamie' }];
+  var childrenOverTime = [{ position: 4, value: 'Rosa' }, { position: 27, value: 'Sylvia' }, { position: 69, value: 'Hugo' }, { position: 91, value: 'Jamie' }];
 
   var childrenOverTimeStream = (0, _renderStream2['default'])(null, [childrenOverTime], { start: 1995, end: 2003 });
 
