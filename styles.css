@@ -1,4 +1,9 @@
-@import url(https://fonts.googleapis.com/css?family=PT+Sans);
+@font-face {
+  font-family: "Sintony";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Sintony"), url("https://fonts.gstatic.com/s/sintony/v4/tDSxdchtIjfjkBOiqelorgLUuEpTyoUstqEm5AMlJo4.woff2") format("woff2");
+}
 
 html, body {
   height: 100%;
@@ -6,9 +11,9 @@ html, body {
 }
 
 body {
-  font-family: 'PT Sans';
+  font-family: 'Sintony';
   margin: 0;
-  background: #0297FF;
+  background: #941F8C;
   color: white;
 }
 
@@ -27,6 +32,10 @@ body {
   padding: 20px;
 }
 
+.slide .time-travel {
+  font-size: 0.7em;
+}
+
 .slide-navigation {
   min-width: 200px;
   display: flex;
@@ -39,8 +48,8 @@ body {
 }
 
 blockquote {
-  color: lightgray;
-  border-left: 2px solid lightgray;
+  color: #F0F0F0;
+  border-left: 2px solid #F0F0F0;
   padding: 0px 10px;
   margin-bottom: 30px;
   margin-left: 20px;
@@ -54,7 +63,7 @@ blockquote {
   color: black;
   padding: 2px 8px;
   text-align: center;
-  margin: 6px;
+  margin: 3px;
   white-space: nowrap;
   border: 1px solid lightgray;
   box-shadow: 0px 1px 1px gray;
@@ -97,7 +106,7 @@ blockquote {
 
 .label {
   display: relative;
-  height: 15px;
+  height: 20px;
 }
 
 .label-marker {
@@ -181,3 +190,10 @@ iframe {
   border: 1px solid lightgray;
 }
 
+a:link {
+  color: yellow;
+}
+
+a:visited {;
+  color: gold;
+}

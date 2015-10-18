@@ -18,16 +18,16 @@ Observables are a data structure. They're comparable to arrays.
 
 If arrays are data expressed over space:
 
-    var children = ['Sally', 'Jim', 'Bob', 'Jamie'];
+    var children = ['Rosa', 'Sylvia', 'Hugo', 'Jamie'];
     // x axis:      < ---  position --- >
 <br>
 Observables are streams, data expressed over time:
   `)();
 
   const childrenOverTime = [
-    {position: 4, value: 'Sally'},
-    {position: 27, value: 'Jim'},
-    {position: 69, value: 'Bob'},
+    {position: 4, value: 'Rosa'},
+    {position: 27, value: 'Sylvia'},
+    {position: 69, value: 'Hugo'},
     {position: 91, value: 'Jamie'}
   ];
 
