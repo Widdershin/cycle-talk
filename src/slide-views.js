@@ -161,7 +161,7 @@ const jQueryComparison = `
 `;
 
 function todoCycle (DOM) {
-  return Rx.Observable.just(jsBin('http://jsbin.com/xigoji/edit?js,output'));
+  return Rx.Observable.just(md('Livecoding Fun Time!\n---')(DOM));;
 }
 
 const conclusion = md(`
@@ -183,7 +183,7 @@ const whoAmI = md(`
   ----
   Presented by Nick Johnstone
 
-  I work for [Powershop](http://powershop.com/) during the day, and [create monstrosities](http://helix-pi.net) with Javascript at night.
+  I work for [Powershop](http://powershop.com/) during the day, and [make strange contraptions](http://helix-pi.net) with Javascript at night.
 
   * Twitter: [@widdnz](https://twitter.com/widdnz)
   * Github: [Widdershin](https://github.com/Widdershin)
