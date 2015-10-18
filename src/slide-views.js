@@ -79,7 +79,7 @@ How can we build applications from that? Well this is where the functional progr
 `;
 
   const clickValueKey = '  .map(ev => 1)';
-  const counterKey = '  .scan(_.add, 0)';
+  const counterKey = '  .scan((total, change) => total + change, 0)';
 
   const timeTravel = TimeTravel(DOM, [
     {stream: click$, label: 'click$'},
@@ -144,13 +144,11 @@ const fluxVsRx = `
 
   React doesn't come with a pure solution for reactive data flow.
 
-  Cycle does (Rx Observables).
+  Cycle does: Rx Observables.
 
   However, React has Flux.
 
   Flux is slightly controversial. It solves the problem of unidirectional data flow, but some people still don't like the taste.
-
-  One of the more popular Flux implementations, redux, is quite similar to writing Cycle apps with RxJS.
 `;
 
 const jQueryComparison = `
@@ -185,18 +183,17 @@ const whoAmI = md(`
   ----
   Presented by Nick Johnstone
 
-  I work for Powershop during the day, and create monstrosities with Javascript at night.
+  I work for [Powershop](http://powershop.com/) during the day, and [create monstrosities](http://helix-pi.net) with Javascript at night.
 
-  * Twitter: @widdnz
-
-  * Github: Widdershin
+  * Twitter: [@widdnz](https://twitter.com/widdnz)
+  * Github: [Widdershin](https://github.com/Widdershin)
 
   If you want to check out these slides, they're live at [widdersh.in/cycle-talk](http://widdersh.in/cycle-talk)
 `);
 
 export default [
   md(`
-From jQuery to Cycle
+From jQuery to Cycle.js
 ===
 
 Live Coding Extravaganza
@@ -216,7 +213,7 @@ What we're going to cover
 * How do you build apps in Cycle.js?
   `),
 
-  md(`Feel free to yell out questions.`),
+  md(`Feel free to yell out questions\n---`),
 
   md(`
 Cycle.js is ...
@@ -225,6 +222,7 @@ Cycle.js is ...
 * A tool for building javascript applications, written by Andre Staltz (@staltz)
 * Similar in nature to React or Elm
 * Extremely fun to build apps with
+* More of an architecture pattern than a framework
 
 ![cycle logo](images/cyclejs_logo.svg)
   `),
@@ -243,7 +241,8 @@ Why should you care?
 
 * Cycle is a way of building reactive apps using functional programming
 * It's a fundamentally different way of thinking about building UIs
-* Cycle is built around observables
+* Cycle is built around observables and pure functions
+* It's really fun
   `),
 
   whatIsAnObservable,
