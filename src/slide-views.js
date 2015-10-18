@@ -187,6 +187,7 @@ const whoAmI = md(`
 
   * Twitter: [@widdnz](https://twitter.com/widdnz)
   * Github: [Widdershin](https://github.com/Widdershin)
+  * Blog: [widdersh.in](http://widdersh.in/)
 
   If you want to check out these slides, they're live at [widdersh.in/cycle-talk](http://widdersh.in/cycle-talk)
 `);
