@@ -201,3 +201,16 @@ a:link {
 a:visited {;
   color: gold;
 }
+
+.slide-navigation button {
+  background: #663399;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  padding: 2px;
+}
+
+.slide-navigation button:disabled {
+  background: purple;
+  color: lightgray;
+}
