@@ -49,7 +49,7 @@ function limit (operator, {min, max}) {
 
 function keyIs (...keys) {
   return (event) => {
-    return _.include(keys, event.key) || _.include(keys, event.code);
+    return _.include(keys, event.key) || _.include(keys, event.code) || _.include(keys, event.keyIdentifier);
   };
 }
 
@@ -58,10 +58,10 @@ export default function slides ({DOM}) {
   const previousSlideButton$ = DOM.select('.previous-slide').events('click');
 
   const nextSlideKey$ = RxDOM.fromEvent(document, 'keydown')
-    .filter(keyIs('ArrowRight', 'Space'));
+    .filter(keyIs('Right', 'ArrowRight', 'Space'));
 
   const previousSlideKey$ = RxDOM.fromEvent(document, 'keydown')
-    .filter(keyIs('ArrowLeft'));
+    .filter(keyIs('Left', 'ArrowLeft'));
 
   const startingSlide = parseInt(location.hash.slice(1), 10) || 0;
 
