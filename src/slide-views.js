@@ -9,6 +9,8 @@ const _ = require('lodash');
 
 const md = (markdown) => (DOM) => Rx.Observable.just(h('.markdown', {innerHTML: marked(markdown)}));
 
+const TodoApp = require('./todo-app');
+
 
 function whatIsAnObservable (DOM) {
   const intro = md(`
@@ -161,7 +163,7 @@ const jQueryComparison = `
 `;
 
 function todoCycle (DOM) {
-  return Rx.Observable.just(md('Livecoding Fun Time!\n---')(DOM));;
+  return TodoApp(DOM).DOM;
 }
 
 const conclusion = md(`
