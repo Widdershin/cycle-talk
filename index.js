@@ -7,7 +7,7 @@ const drivers = {
   DOM: makeDOMDriver('.app')
 };
 
-const [sinks, sources] = Cycle.run(slides, drivers);
+const {sinks, sources} = Cycle.run(slides, drivers);
 
 if (module.hot) {
   module.hot.accept();
