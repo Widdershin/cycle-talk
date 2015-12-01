@@ -47134,7 +47134,9 @@ exports['default'] = slides;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _cycleCore = require('@cycle/core');
+var _Rx = require('Rx');
+
+var _Rx2 = _interopRequireDefault(_Rx);
 
 var _cycleDom = require('@cycle/dom');
 
@@ -47150,7 +47152,7 @@ var _slideViews2 = _interopRequireDefault(_slideViews);
 
 var RxDOM = _rxDom.DOM;
 
-_cycleCore.Rx.config.longStackSupport = true;
+_Rx2['default'].config.longStackSupport = true;
 
 function slideNavigation(slidePosition, totalSlides) {
   var showingFirstSlide = function showingFirstSlide() {
@@ -47208,7 +47210,7 @@ function slides(_ref2) {
 
   var startingSlide = parseInt(location.hash.slice(1), 10) || 0;
 
-  var slidePosition$ = _cycleCore.Rx.Observable.merge(nextSlideButton$.merge(nextSlideKey$).map(function (_) {
+  var slidePosition$ = _Rx2['default'].Observable.merge(nextSlideButton$.merge(nextSlideKey$).map(function (_) {
     return +1;
   }), previousSlideButton$.merge(previousSlideKey$).map(function (_) {
     return -1;
@@ -47233,4 +47235,4 @@ function slides(_ref2) {
 
 module.exports = exports['default'];
 
-},{"./slide-views":83,"@cycle/core":2,"@cycle/dom":3,"lodash":75,"rx-dom":78}]},{},[1]);
+},{"./slide-views":83,"@cycle/dom":3,"Rx":61,"lodash":75,"rx-dom":78}]},{},[1]);
