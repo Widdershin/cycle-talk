@@ -9,7 +9,7 @@ const _ = require('lodash');
 
 const md = (markdown) => (DOM) => Rx.Observable.just(h('.markdown', {innerHTML: marked(markdown)}));
 
-const TodoApp = require('./todo-app');
+const main = require('./counter');
 
 
 function whatIsAnObservable (DOM) {
@@ -121,23 +121,15 @@ function introToCycle (DOM) {
   );
 }
 
-function counterFullExample (DOM) {
-  return Rx.Observable.just(
-    jsBin('http://jsbin.com/balohe/edit?js,output')
-  );
-}
-
-const reactComparison = `
-  How does Cycle.js compare to React?
+const rxStuff = `
+  So where do these Observables come from?
   ----
 
-  React and Cycle have similar goals.
+  A library named RxJS.
 
-  * Unidirectional data flow
-  * Avoid side effects
-  * Virtual DOM
+  Part of the Reactive Extensions technology family. RxJS does the heavy lifting and Cycle is a very small abstraction on top.
 
-  In fact, there is an [implementation of Cycle in React](https://github.com/pH200/cycle-react).
+  RxJS is mature, and an exciting new version is in active development.
 `;
 
 const fluxVsRx = `
@@ -153,17 +145,21 @@ const fluxVsRx = `
   Flux is slightly controversial. It solves the problem of unidirectional data flow, but some people still don't like the taste.
 `;
 
-const jQueryComparison = `
-  How does Cycle.js compare to jQuery?
-  ----
+function counterLiveCodingTime (DOM) {
+  return main(DOM).DOM;
+}
 
-  This isn't really a fair comparison, but there are a lot of small apps in the world written primarily with jQuery.
+function otherCoolThings () {
+  return md(`
+Some of the things I've built
+---
 
-  So, I figured I would make a simple application in jQuery and then rewrite it in Cycle.js.
-`;
-
-function todoCycle (DOM) {
-  return TodoApp(DOM).DOM;
+* [Ghostwriter](http://widdersh.in/ghostwriter)
+* [tricycle](http://widdersh.in/tricycle)
+* [cycle-time-travel](http://cycle.js.org/cycle-time-travel)
+* [rx-undoable](http://widdersh.in/rx-undoable/)
+* Powerpeople
+  `)();
 }
 
 const conclusion = md(`
@@ -196,15 +192,16 @@ const whoAmI = md(`
 
 export default [
   md(`
-From jQuery to Cycle.js
+What is Cycle.js?
 ===
 
 Live Coding Extravaganza
 ---
 
-
 Presented by Nick Johnstone
   `),
+
+  md(`Note to self: start recording`),
 
   md(`
 What we're going to cover
@@ -216,7 +213,25 @@ What we're going to cover
 * How do you build apps in Cycle.js?
   `),
 
-  md(`Feel free to yell out questions\n---`),
+  md(`
+But first, a question...
+---
+
+Why is React cool?
+  `),
+
+  md(`
+State is the enemy
+---
+
+What is state?
+
+State is the data in your application that changes.
+
+React is cool because it helps us reason about how the view updates in response to state.
+
+So where does Cycle.js come in?
+  `),
 
   md(`
 Cycle.js is ...
@@ -242,10 +257,10 @@ I think in this case, you actually might.
 Why should you care?
 ---
 
-* Cycle is a way of building reactive apps using functional programming
-* It's a fundamentally different way of thinking about building UIs
-* Cycle is built around observables and pure functions
-* It's really fun
+* Cycle helps you reason about the flow of data in your application
+* It's easy to test
+* It's a bit of a brain bender to start with, but that's a good thing
+* The community is nice and welcoming
   `),
 
   whatIsAnObservable,
@@ -256,17 +271,13 @@ Why should you care?
 
   introToCycle,
 
-  counterFullExample,
-
-  md(reactComparison),
+  md(rxStuff),
 
   md(fluxVsRx),
 
-  md(jQueryComparison),
+  counterLiveCodingTime,
 
-  todoJquery,
-
-  todoCycle,
+  otherCoolThings,
 
   conclusion,
 
