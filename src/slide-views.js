@@ -162,6 +162,19 @@ Some of the things I've built
   `)();
 }
 
+function resources () {
+  return md(`
+Links
+---
+
+* [Cycle.js](http://cycle.js.org)
+* [vic/awesome-cyclejs](https://github.com/vic/awesome-cyclejs)
+* [Rxmarbles](http://rxmarbles.com/)
+* [cycle-examples](https://github.com/cyclejs/cycle-examples)
+* [Staltz's Reactive Conf 2015](https://www.youtube.com/watch?v=uNZnftSksYg)
+  `)();
+}
+
 const conclusion = md(`
   In conclusion
   ----
@@ -278,6 +291,8 @@ Why should you care?
   counterLiveCodingTime,
 
   otherCoolThings,
+
+  resources,
 
   conclusion,
 
