@@ -1,4 +1,4 @@
-import {Rx} from '@cycle/core';
+import Rx from 'Rx';
 import {h} from '@cycle/dom';
 import _ from 'lodash';
 
