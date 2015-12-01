@@ -16497,9 +16497,7 @@ process.umask = function() { return 0; };
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _require = require('@cycle/core');
-
-var Rx = _require.Rx;
+var Rx = require('rx');
 
 function calculateTimestamp(mouseX) {
   return mouseX / document.documentElement.clientWidth * 10000;
@@ -16534,13 +16532,10 @@ function makeTimeTravelPosition$(mousePosition$, dragging$) {
 }
 
 module.exports = makeTimeTravelPosition$;
-},{"@cycle/core":2}],65:[function(require,module,exports){
+},{"rx":80}],65:[function(require,module,exports){
 'use strict';
 
-var _require = require('@cycle/core');
-
-var Rx = _require.Rx;
-
+var Rx = require('rx');
 var makeTimeTravelPosition$ = require('./calculate-time-travel-position');
 
 function getMousePosition(ev) {
@@ -16583,7 +16578,7 @@ function intent(DOM) {
 }
 
 module.exports = intent;
-},{"./calculate-time-travel-position":64,"@cycle/core":2}],66:[function(require,module,exports){
+},{"./calculate-time-travel-position":64,"rx":80}],66:[function(require,module,exports){
 "use strict";
 
 function recordStream(streamInfo, time$) {
@@ -16701,9 +16696,7 @@ module.exports = stylesheet;
 },{"@cycle/dom":3}],70:[function(require,module,exports){
 'use strict';
 
-var _require = require('@cycle/core');
-
-var Rx = _require.Rx;
+var Rx = require('rx');
 
 function timeTravelStreams(streams, time$) {
   var timeTravel = {};
@@ -16724,7 +16717,7 @@ function timeTravelStreams(streams, time$) {
 }
 
 module.exports = timeTravelStreams;
-},{"@cycle/core":2}],71:[function(require,module,exports){
+},{"rx":80}],71:[function(require,module,exports){
 'use strict';
 
 require('es6-shim');
@@ -16760,9 +16753,7 @@ module.exports = TimeTravel;
 },{"./intent":65,"./record-streams":66,"./scoped-dom":68,"./time":72,"./time-travel-streams":70,"./view":73,"es6-shim":74}],72:[function(require,module,exports){
 'use strict';
 
-var _require = require('@cycle/core');
-
-var Rx = _require.Rx;
+var Rx = require('rx');
 
 function getCurrentTime() {
   return new Date().getTime();
@@ -16789,18 +16780,16 @@ function makeTime$(playing$, timeTravelPosition$) {
 }
 
 module.exports = makeTime$;
-},{"@cycle/core":2}],73:[function(require,module,exports){
+},{"rx":80}],73:[function(require,module,exports){
 'use strict';
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i]; return arr2; } else { return Array.from(arr); } }
 
-var _require = require('@cycle/core');
+var Rx = require('Rx');
 
-var Rx = _require.Rx;
+var _require = require('@cycle/dom');
 
-var _require2 = require('@cycle/dom');
-
-var h = _require2.h;
+var h = _require.h;
 
 var renderStreams = require('./render-streams');
 var stylesheet = require('./style');
@@ -16818,7 +16807,7 @@ function timeTravelBarView(name, time$, playing$, recordedStreams) {
 }
 
 module.exports = timeTravelBarView;
-},{"./render-streams":67,"./style":69,"@cycle/core":2,"@cycle/dom":3}],74:[function(require,module,exports){
+},{"./render-streams":67,"./style":69,"@cycle/dom":3,"Rx":61}],74:[function(require,module,exports){
 (function (process,global){
  /*!
   * https://github.com/paulmillr/es6-shim
